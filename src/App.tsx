@@ -11,6 +11,7 @@ import GenerateInvite from "./pages/GenerateInvite";
 import FamilyInvite from "./pages/FamilyInvite";
 import StaffFirstLogin from "./pages/StaffFirstLogin";
 import PatientSnapshot from "./pages/PatientSnapshot";
+import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
