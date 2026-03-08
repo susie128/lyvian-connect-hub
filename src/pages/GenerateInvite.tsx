@@ -1,17 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import LyvianLogo from "@/components/LyvianLogo";
 import { ArrowLeft, Copy, QrCode, Check, Link2 } from "lucide-react";
 
+const mockDoctors = [
+  { id: "dr-001", name: "Dr. Sarah Chen" },
+  { id: "dr-002", name: "Dr. James Wilson" },
+  { id: "dr-003", name: "Dr. Emily Park" },
+];
+
 const GenerateInvite = () => {
   const navigate = useNavigate();
-  const [role] = useState("practitioner"); // Mock: logged-in user role
-  const [practitionerId, setPractitionerId] = useState("");
+  // Mock: "practitioner" | "nurse" | "admin"
+  const [role] = useState<"practitioner" | "nurse" | "admin">("practitioner");
+  const [selectedDoctor, setSelectedDoctor] = useState("");
   const [generated, setGenerated] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -27,6 +33,8 @@ const GenerateInvite = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const canGenerate = isPractitioner || selectedDoctor;
 
   return (
     <div className="min-h-screen bg-background">
@@ -46,18 +54,25 @@ const GenerateInvite = () => {
             <CardDescription>
               {isPractitioner
                 ? "Create an invite link for your patient"
-                : "Enter the practitioner ID to generate an invite"}
+                : "Select the attending doctor, then generate an invite"}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {!isPractitioner && (
               <div className="space-y-2">
-                <Label>Practitioner ID</Label>
-                <Input
-                  value={practitionerId}
-                  onChange={(e) => setPractitionerId(e.target.value)}
-                  placeholder="Enter doctor's Lyvian ID"
-                />
+                <Label>Attending Doctor</Label>
+                <Select value={selectedDoctor} onValueChange={setSelectedDoctor}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a doctor" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {mockDoctors.map((doc) => (
+                      <SelectItem key={doc.id} value={doc.id}>
+                        {doc.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             )}
 
@@ -79,7 +94,7 @@ const GenerateInvite = () => {
             </div>
 
             {!generated ? (
-              <Button onClick={handleGenerate} className="w-full" size="lg">
+              <Button onClick={handleGenerate} className="w-full" size="lg" disabled={!canGenerate}>
                 Generate Invite
               </Button>
             ) : (
