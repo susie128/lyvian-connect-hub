@@ -61,7 +61,7 @@ const Dashboard = () => {
               icon={<UserPlus />}
               title="Generate Patient Invite"
               description="Create invite link or QR code for a new patient"
-              onClick={() => navigate("/invite")}
+              onClick={() => navigate(`/invite?role=${role}`)}
             />
           )}
           {!isStaff && (

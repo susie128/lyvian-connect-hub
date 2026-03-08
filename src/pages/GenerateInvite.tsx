@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,8 +15,8 @@ const mockDoctors = [
 
 const GenerateInvite = () => {
   const navigate = useNavigate();
-  // Mock: "practitioner" | "nurse" | "admin"
-  const [role] = useState<"practitioner" | "nurse" | "admin">("practitioner");
+  const [searchParams] = useSearchParams();
+  const role = (searchParams.get("role") as "practitioner" | "nurse" | "admin") || "practitioner";
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const [generated, setGenerated] = useState(false);
   const [copied, setCopied] = useState(false);
