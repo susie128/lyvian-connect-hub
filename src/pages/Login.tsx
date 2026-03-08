@@ -81,12 +81,6 @@ const Login = () => {
               </form>
             </Tabs>
 
-            <p className="mt-6 text-center text-sm text-muted-foreground">
-              Patient?{" "}
-              <button onClick={() => navigate("/register")} className="font-medium text-primary hover:underline">
-                Register with invite link
-              </button>
-            </p>
           </CardContent>
         </Card>
       </div>
