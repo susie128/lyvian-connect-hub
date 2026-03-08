@@ -11,6 +11,7 @@ import GenerateInvite from "./pages/GenerateInvite";
 import FamilyInvite from "./pages/FamilyInvite";
 import StaffFirstLogin from "./pages/StaffFirstLogin";
 import PatientSnapshot from "./pages/PatientSnapshot";
+import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/family-invite" element={<FamilyInvite />} />
           <Route path="/staff-first-login" element={<StaffFirstLogin />} />
           <Route path="/snapshot" element={<PatientSnapshot />} />
+          <Route path="/chat/:patientId" element={<Chat />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
