@@ -32,9 +32,27 @@ const Dashboard = () => {
 
       <main className="container max-w-4xl py-8 animate-fade-in">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Metro Health Network</p>
-        </div>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold">Dashboard</h1>
+              <p className="text-muted-foreground">Metro Health Network</p>
+            </div>
+            {/* Demo role switcher */}
+            <div className="flex items-center gap-2">
+              <RefreshCw size={14} className="text-muted-foreground" />
+              <Select value={role} onValueChange={(v) => setRole(v as Role)}>
+                <SelectTrigger className="w-[140px] h-8 text-xs">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="practitioner">Practitioner</SelectItem>
+                  <SelectItem value="nurse">Nurse</SelectItem>
+                  <SelectItem value="admin">Admin</SelectItem>
+                  <SelectItem value="patient">Patient</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {isStaff && (
