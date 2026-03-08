@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import LyvianLogo from "@/components/LyvianLogo";
-import { UserPlus, Users, ClipboardList, LogOut, QrCode, Link2, RefreshCw } from "lucide-react";
+import { UserPlus, Users, ClipboardList, LogOut, QrCode, Link2, RefreshCw, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -111,15 +111,27 @@ const Dashboard = () => {
                       <p className="text-xs text-muted-foreground">{invite.time}</p>
                     </div>
                   </div>
-                  <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                    invite.status === "Joined"
-                      ? "bg-success/10 text-success"
-                      : invite.status === "Pending"
-                      ? "bg-warning/10 text-warning"
-                      : "bg-destructive/10 text-destructive"
-                  }`}>
-                    {invite.status}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                      invite.status === "Joined"
+                        ? "bg-success/10 text-success"
+                        : invite.status === "Pending"
+                        ? "bg-warning/10 text-warning"
+                        : "bg-destructive/10 text-destructive"
+                    }`}>
+                      {invite.status}
+                    </span>
+                    {invite.link && (
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-primary hover:text-primary hover:bg-primary/10"
+                        onClick={(e) => { e.stopPropagation(); navigate(invite.link!); }}
+                      >
+                        <MessageCircle size={16} />
+                      </Button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
