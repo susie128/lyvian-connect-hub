@@ -81,9 +81,10 @@ const Login = () => {
               </form>
             </Tabs>
 
-            <p className="mt-6 text-center text-sm text-muted-foreground">
-              Haven't registered yet? Contact your doctor or practice to join.
-            </p>
+            <div className="mt-6 text-center text-sm text-muted-foreground space-y-1">
+              <p>Haven't registered yet?</p>
+              <p className="font-medium text-foreground/70">Contact your doctor or practice to join.</p>
+            </div>
           </CardContent>
         </Card>
       </div>
