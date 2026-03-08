@@ -31,6 +31,7 @@ const App = () => (
           <Route path="/family-invite" element={<FamilyInvite />} />
           <Route path="/staff-first-login" element={<StaffFirstLogin />} />
           <Route path="/snapshot" element={<PatientSnapshot />} />
+          <Route path="/chat/:patientId" element={<Chat />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
