@@ -91,7 +91,7 @@ const Dashboard = () => {
           <CardContent>
             <div className="space-y-3">
               {[
-                { name: "John Miller", status: "Used", time: "2 hours ago", icon: Link2 },
+                { name: "John Miller", status: "Joined", time: "2 hours ago", icon: Link2, link: "/chat/john-miller" },
                 { name: "Maria Garcia", status: "Pending", time: "1 day ago", icon: QrCode },
                 { name: "David Park", status: "Expired", time: "8 days ago", icon: Link2 },
               ].map((invite) => (
