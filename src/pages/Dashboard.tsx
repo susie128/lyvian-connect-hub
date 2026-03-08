@@ -3,9 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import LyvianLogo from "@/components/LyvianLogo";
 import { UserPlus, Users, ClipboardList, LogOut, QrCode, Link2 } from "lucide-react";
+import { useState } from "react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  // Mock role: "practitioner" | "nurse" | "admin" | "patient"
+  const [role] = useState<"practitioner" | "nurse" | "admin" | "patient">("practitioner");
+
+  const isStaff = role !== "patient";
+  const displayName = isStaff ? "Dr. Sarah Chen" : "John Miller";
 
   return (
     <div className="min-h-screen bg-background">
@@ -14,7 +20,7 @@ const Dashboard = () => {
         <div className="container flex h-16 items-center justify-between">
           <LyvianLogo size="sm" />
           <div className="flex items-center gap-3">
-            <span className="text-sm text-muted-foreground">Dr. Sarah Chen</span>
+            <span className="text-sm text-muted-foreground">{displayName}</span>
             <Button variant="ghost" size="icon" onClick={() => navigate("/login")}>
               <LogOut size={16} />
             </Button>
@@ -29,24 +35,30 @@ const Dashboard = () => {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <DashCard
-            icon={<UserPlus />}
-            title="Generate Patient Invite"
-            description="Create invite link or QR code for a new patient"
-            onClick={() => navigate("/invite")}
-          />
-          <DashCard
-            icon={<Users />}
-            title="Family Invites"
-            description="Manage patient family member invitations"
-            onClick={() => navigate("/family-invite")}
-          />
-          <DashCard
-            icon={<ClipboardList />}
-            title="Patient Snapshot"
-            description="View and edit lightweight patient profiles"
-            onClick={() => navigate("/snapshot")}
-          />
+          {isStaff && (
+            <DashCard
+              icon={<UserPlus />}
+              title="Generate Patient Invite"
+              description="Create invite link or QR code for a new patient"
+              onClick={() => navigate("/invite")}
+            />
+          )}
+          {!isStaff && (
+            <DashCard
+              icon={<Users />}
+              title="Family Invites"
+              description="Invite family members to join your care team"
+              onClick={() => navigate("/family-invite")}
+            />
+          )}
+          {isStaff && (
+            <DashCard
+              icon={<ClipboardList />}
+              title="Patient Snapshot"
+              description="View and edit lightweight patient profiles"
+              onClick={() => navigate("/snapshot")}
+            />
+          )}
         </div>
 
         {/* Recent invites mock */}
