@@ -2,13 +2,15 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import LyvianLogo from "@/components/LyvianLogo";
-import { UserPlus, Users, ClipboardList, LogOut, QrCode, Link2 } from "lucide-react";
+import { UserPlus, Users, ClipboardList, LogOut, QrCode, Link2, RefreshCw } from "lucide-react";
 import { useState } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+type Role = "practitioner" | "nurse" | "admin" | "patient";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  // Mock role: "practitioner" | "nurse" | "admin" | "patient"
-  const [role] = useState<"practitioner" | "nurse" | "admin" | "patient">("practitioner");
+  const [role, setRole] = useState<Role>("practitioner");
 
   const isStaff = role !== "patient";
   const displayName = isStaff ? "Dr. Sarah Chen" : "John Miller";
