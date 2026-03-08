@@ -95,7 +95,13 @@ const Dashboard = () => {
                 { name: "Maria Garcia", status: "Pending", time: "1 day ago", icon: QrCode },
                 { name: "David Park", status: "Expired", time: "8 days ago", icon: Link2 },
               ].map((invite) => (
-                <div key={invite.name} className="flex items-center justify-between rounded-lg border p-3">
+                <div
+                  key={invite.name}
+                  className={`flex items-center justify-between rounded-lg border p-3 ${
+                    invite.link ? "cursor-pointer hover:bg-muted/50 transition-colors" : ""
+                  }`}
+                  onClick={() => invite.link && navigate(invite.link)}
+                >
                   <div className="flex items-center gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted">
                       <invite.icon size={16} className="text-muted-foreground" />
@@ -106,7 +112,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                    invite.status === "Used"
+                    invite.status === "Joined"
                       ? "bg-success/10 text-success"
                       : invite.status === "Pending"
                       ? "bg-warning/10 text-warning"
